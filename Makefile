@@ -46,6 +46,15 @@ clean:		## Remove all auto-generated files
 format:		## Format with black
 	black .
 
+build:		## Build collection
+	ansible-galaxy collection build
+
+install:
+	rm -f paloaltonetworks*
+	ansible-galaxy collection build . --force
+	ansible-galaxy collection install paloaltonetworks* --force
+	rm -f paloaltonetworks*
+
 .PHONY: check-format
 check-format:	## Check with black
 	black --check --diff .
